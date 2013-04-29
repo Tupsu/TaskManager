@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Login</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
+		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+		
+		<!-- Load intalio scripts -->
+		<script src="Intalio/Authenticate.js"></script>
+		<script src="Intalio/TaskHandler.js"></script>
+		
+		<!-- Load Language scripts -->
+		<script src="Language/Language_fi.js"></script>
+		<script src="Language/LanguageLogic.js"></script>
+		
+		<!-- Load listeners scripts -->
+		<script src="Listeners/NavButtonListeners.js"></script>
+		<script src="Listeners/PageChangeListener.js"></script>
+		
+		<!-- Load login scripts -->
+		<script src="Login/CheckLogin.js"></script>
+		<script src="Login/Login.js"></script>
+	</head>
+	<body>
+	<div data-role="page">
+		<div data-role="content" id="loginContent">
+			 <label id="labelUsername" for="username">Käyttäjänimi</label>
+			 <input data-clear-btn="true" name="username" id="username" value="admin" type="text">
+			 
+			 <label id="labelPassword" for="password">Salasana</label>
+			 <input data-clear-btn="true" name="password" id="password" value="changeit" autocomplete="off" type="password">
+			 
+			 <input id="btn_login" value="Login" data-iconpos="right" data-mini="true" type="button">
+		</div><!-- /content -->
+	</div><!-- /page -->
+	</body>
+</html>
