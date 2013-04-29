@@ -17,21 +17,18 @@ function authenticate(username, password) {
 		type: "POST",
 		dataType: "xml",
 		data: soapMessage,
-		complete: getToken,
+		complete: setToken,
 		contentType: "text/xml; charset=\"utf-8\""
 	});
 }
 
 // Called when sending of soap message is complete
-function getToken(xmlHttpRequest, status) {
+function setToken(xmlHttpRequest, status) {
 	var token;
 	
 	if (status = "success") {
 		token = $(xmlHttpRequest.responseText)
 	.find('tokenws\\:token').text();
-	// Store token in hidden input element
 	localStorage.setItem('token', token);
-	//$('#token').val(token);
-	//getAvailableTasks(token, "ACTIVITY", "T._state = TaskState.READY");
 	}
 }
