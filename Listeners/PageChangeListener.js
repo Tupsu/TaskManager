@@ -3,7 +3,9 @@ $(document).ready(function() {
     $(document).on("pagechange", function (event) {
         if ($.mobile.activePage.attr('id') == "mainPage") {
             // Get tasks
-            getAvailableTasks(localStorage.getItem('token'), "ACTIVITY", "T._state = TaskState.READY");
+            if (isTokenSet()) {
+                getAvailableTasks(localStorage.getItem('token'), "ACTIVITY", "T._state = TaskState.READY");
+            }
         }
     });
 });

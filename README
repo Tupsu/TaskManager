@@ -1,0 +1,6 @@
+Simple jquery mobile app that retrivies tasks from intalio.
+
+Features:
+* Find tasks that are available for current user.
+* Find notifications that are available for current user.
+* Create new tasks that are available for current user.
