@@ -1,4 +1,6 @@
 $(document).ready(function() {
+    "use strict";
+    
     // Translate page when page is loaded
     translatePage();
     // Translate page when page is changed via changePage(...)
@@ -8,7 +10,9 @@ $(document).ready(function() {
 });
 
 function translatePage() {
-    if ($.mobile.activePage.attr('id') == "mainPage") {
+    "use strict";
+    
+    if ($.mobile.activePage.attr('id') === Strings.mainPageId) {
         $('#recievedTasks .ui-btn-text').text(Lang.btn_recieved_tasks);
         $('#handledTasks .ui-btn-text').text(Lang.btn_handled_tasks);
         $('#createTask .ui-btn-text').text(Lang.btn_create_task);
@@ -17,7 +21,7 @@ function translatePage() {
         $('form div input').attr('placeholder', Lang.search_tasks); 
     }
     
-    if ($.mobile.activePage.attr('id') == "loginPage") {
+    if ($.mobile.activePage.attr('id') === Strings.loginPageId) {
         $('#labelUsername').text(Lang.username);
         $('#labelPassword').text(Lang.password);
         $('#btn_login .ui-btn-text').text(Lang.btn_login);

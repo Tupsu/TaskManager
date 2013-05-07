@@ -1,9 +1,7 @@
 function getAvailableTasks(participantToken, taskType, subQuery) {
-	var participantToken = participantToken;
-	var taskType = taskType;
-	var subQuery = subQuery;
-	var taskManagementServiceUrl = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '') +"/axis2/services/TaskManagementServices?wsdl";
-	
+    "use strict";
+    
+	var taskManagementServiceUrl = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '') + Strings.taskManagementServiceUrl;
 	var soapMessage = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" " +
 "xmlns:tas=\"http://www.intalio.com/BPMS/Workflow/TaskManagementServices-20051109/\">" +
 "<soapenv:Header/>" +
@@ -18,54 +16,55 @@ function getAvailableTasks(participantToken, taskType, subQuery) {
 
 	$.ajax({
 		url: taskManagementServiceUrl,
-		type: "POST",
-		dataType: "xml",
+		type: Strings.type,
+		dataType: Strings.dataType,
 		data: soapMessage,
 		complete: buildTaskList,
-		contentType: "text/xml; charset=\"utf-8\""
+		contentType: Strings.contentType
 	});
 }
 
 // Called when sending of soap message is complete
 function buildTaskList(xmlHttpRequest, status) {
+	"use strict";
 	
-	if (status = "success") {
-		$(xmlHttpRequest.responseText).find('tms\\:task').each(function() {
-			var taskId = $(this).find('tms\\:taskId').text();
-			var taskState = $(this).find('tms\\:taskState').text();
-			var type = resolveTaskType($(this).find('tms\\:taskType').text());
-			var description = $(this).find('tms\\:description').text();
-			var formUrl = $(this).find('tms\\:formUrl').text();
-			var creationDate = $(this).find('tms\\:creationDate').text();
+	if (status === Strings.success) {
+        // Loop trought all task elements in response message
+		$(xmlHttpRequest.responseText).find(Strings.soapTaskElement).each(function() {
+			var taskId = $(this).find(Strings.soapTaskIdElement).text();
+			var taskState = $(this).find(Strings.soapTaskStateElemet).text();
+			var type = resolveTaskType($(this).find(Strings.soapTaskTypeElement).text());
+			var description = $(this).find(Strings.soapTaskDescriptionElement).text();
+			var formUrl = $(this).find(Strings.soapFormUrlElement).text();
+			var creationDate = $(this).find(Strings.soapCrtnDtElement).text();
 			
 			var constructedFormUrl = constructFormUrl(
 			    taskId,
 			     type,
 			      formUrl,
-			       localStorage.getItem('token'),
-			        "intalio\\admin", "false");
-			        
-			$('#taskList').append('<li><a href=\" ' 
-			+ constructedFormUrl +
-			 '\" data-ajax=\"false\">' +
-			  description + '</a></li>');
-				// This fixes problem where listview style disappear
-				$('.ui-page-active .ui-listview').listview('refresh');
+			       localStorage.getItem(Strings.token),
+			        Strings.defaultUser, Strings.strFalse);
+
+		    var doRefresh = true;
+			appendToTaskList(constructedFormUrl, description, doRefresh);
 		});
 	}
 }
 
 function resolveTaskType(taskType) {
-    if (taskType == "ACTIVITY") {
-        return "PATask";
-    } else if (taskType == "NOTIFICATION") {
-        return "Notification";
-    } else {
-        return "PIPATask";
+    "use strict";
+    
+    if (taskType === Strings.activity) {
+        return Strings.PATask;
+    } else if (taskType === Strings.notification) {
+        return Strings.notificationLwrCs;
     }
+    return Strings.PIPATask;
 }
 
 function constructFormUrl (taskId, type, formUrl, token, user, claimTaskOnOpen) {
+    "use strict";
+    
 	var url = formUrl +
 	 "?id=" + taskId +
 	  "&type=" + type +
@@ -75,4 +74,27 @@ function constructFormUrl (taskId, type, formUrl, token, user, claimTaskOnOpen) 
 	     "&claimTaskOnOpen=" + claimTaskOnOpen;
 	     
 	     return url;
+}
+
+function appendToTaskList(url, description, doRefresh) {
+    var liStart = "<li>";
+    var liEnd = "</li>";
+    
+    var linkStart = '<a href=\" ';
+    var linkEnd = "</a>";
+    
+    var dataAjax = '\" data-ajax=\"false\">';
+    
+    $('#taskList').append(liStart +
+         linkStart +
+          url +
+           dataAjax +
+            description +
+             linkEnd +
+              liEnd);
+              
+    if (doRefresh) {
+      // This fixes problem where listview style disappear
+      $('.ui-page-active .ui-listview').listview('refresh');
+    }
 }

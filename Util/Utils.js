@@ -2,7 +2,9 @@
  * Checks if token exists.
  */
 function  isTokenSet() {
-    if (localStorage.getItem("token")) {
+    "use strict";
+    
+    if (localStorage.getItem(Strings.token)) {
         return true;
     }
     return false;

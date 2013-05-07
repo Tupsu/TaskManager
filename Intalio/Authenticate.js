@@ -1,8 +1,10 @@
 function authenticate(username, password) {
-    var tokenServiceUrl = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '') + "/axis2/services/TokenService?wsdl";
-	 var soapMessage =
+    "use strict";
+    
+    var tokenServiceUrl = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '') + Strings.tokenServiceUrl;
+    var soapMessage =
 	'<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"' +
- 	' xmlns:tok=\"http://tempo.intalio.org/security/tokenService/\">' +
+    ' xmlns:tok=\"http://tempo.intalio.org/security/tokenService/\">' +
    ' <soapenv:Header/>' +
    ' <soapenv:Body>' +
      ' <tok:authenticateUser>' +
@@ -14,21 +16,23 @@ function authenticate(username, password) {
 
 	$.ajax({
 		url: tokenServiceUrl,
-		type: "POST",
-		dataType: "xml",
+		type: Strings.type,
+		dataType: Strings.dataType,
 		data: soapMessage,
 		complete: setToken,
-		contentType: "text/xml; charset=\"utf-8\""
+		contentType: Strings.contentType
 	});
 }
 
 // Called when sending of soap message is complete
 function setToken(xmlHttpRequest, status) {
-	var token;
-	
-	if (status = "success") {
+    "use strict";
+    
+    var token;
+    
+	if (status === Strings.success) {
 		token = $(xmlHttpRequest.responseText)
-	.find('tokenws\\:token').text();
-	localStorage.setItem('token', token);
+	.find(Strings.soapTokenElement).text();
+	localStorage.setItem(Strings.token, token);
 	}
 }

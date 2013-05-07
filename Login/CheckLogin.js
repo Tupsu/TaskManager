@@ -1,11 +1,12 @@
 $(document).ready(function() {
-	 // Check if user is logged in
+    "use strict";
+    
+	// Check if user is logged in
     if (isTokenSet()) {
         // Get tasks
-        getAvailableTasks(localStorage.getItem('token'), "ACTIVITY", "T._state = TaskState.READY");
+        getAvailableTasks(localStorage.getItem(Strings.token), Strings.activity, Strings.subQueryTaskStateRdy);
     } else {
         // User is not logged in -> load login page
-        $.mobile.changePage('/TaskManager/Login/Login.html');
+        $.mobile.changePage(Strings.loginPageUrl);
     }
 });
-
