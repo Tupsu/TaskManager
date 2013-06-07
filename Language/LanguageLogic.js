@@ -18,7 +18,8 @@ function translatePage() {
         $('#createTask .ui-btn-text').text(Lang.btn_create_task);
         $('title').text(Lang.title);
         $('#taskList').attr('data-filter-placeholder', Lang.search_tasks);
-        $('form div input').attr('placeholder', Lang.search_tasks); 
+        $('form div input').attr('placeholder', Lang.search_tasks);
+        $('#logout .ui-btn-text').text(Lang.btn_logout);
     }
     
     if ($.mobile.activePage.attr('id') === Strings.loginPageId) {

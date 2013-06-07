@@ -9,4 +9,19 @@ $(document).ready(function() {
         }
         $.mobile.changePage(Strings.mainPageUrl);
     });
+    
+    $(document).on('click', '#logout', function() {
+        if (isTokenSet()) {
+            logout();
+            $.mobile.changePage(Strings.loginPageUrl);
+        }
+    });
 });
+
+/**
+ * Logs out the current user
+ */
+function logout() {
+    localStorage.removeItem(Strings.token);
+    clearTaskList();
+}
