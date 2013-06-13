@@ -4,10 +4,12 @@ $(document).ready(function() {
     $(document).on('click', '#btn_login', function() {
         if (!isTokenSet()) {
             var username = $('#username').val();
-            var password = $('#password').val();   
-            authenticate(username, password);
+            var password = $('#password').val();  
+            // authenticate->setToken->callback function->changePage
+            authenticate(username, password, function() {
+                $.mobile.changePage(Strings.mainPageUrl);
+            });
         }
-        $.mobile.changePage(Strings.mainPageUrl);
     });
     
     $(document).on('click', '#logout', function() {

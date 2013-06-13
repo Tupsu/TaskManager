@@ -1,4 +1,5 @@
-$(document).ready(function() {
+// Wait until page is fully loaded. $(document).ready() causes incorrect page loading when using changePage(arg) on some browsers
+$(window).load(function() {
     "use strict";
     
 	// Check if user is logged in

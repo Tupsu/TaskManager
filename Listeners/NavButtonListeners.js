@@ -22,13 +22,3 @@ $(document).ready(function() {
         getAvailableTasks(localStorage.getItem(Strings.token), Strings.init, "");
     });
 });
-
-/*
- * Removes every li element from tasklist
- *
- */
-function clearTaskList() {
-    "use strict";
-    
-    $('#taskList').find('li').remove();
-}

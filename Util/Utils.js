@@ -9,3 +9,13 @@ function  isTokenSet() {
     }
     return false;
 }
+
+/*
+ * Removes every li element from tasklist
+ *
+ */
+function clearTaskList() {
+    "use strict";
+    
+    $('#taskList').find('li').remove();
+}

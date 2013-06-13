@@ -1,4 +1,4 @@
-function authenticate(username, password) {
+function authenticate(username, password, callback) {
     "use strict";
     
     var tokenServiceUrl = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '') + Strings.tokenServiceUrl;
@@ -19,20 +19,19 @@ function authenticate(username, password) {
 		type: Strings.type,
 		dataType: Strings.dataType,
 		data: soapMessage,
-		complete: setToken,
-		contentType: Strings.contentType
-	});
-}
-
-// Called when sending of soap message is complete
-function setToken(xmlHttpRequest, status) {
-    "use strict";
+		contentType: Strings.contentType,
+		// Request complete, store token
+		complete: function(xmlHttpRequest, status) {
+		    var token;
     
-    var token;
-    
-	if (status === Strings.success) {
-		token = $(xmlHttpRequest.responseText)
-	.find(Strings.soapTokenElement).text();
-	localStorage.setItem(Strings.token, token);
-	}
+            if (status === Strings.success) {
+            
+            // Find token string    
+            token = $(xmlHttpRequest.responseText)
+            .find(Strings.soapTokenElement).text();
+            localStorage.setItem(Strings.token, token);
+            callback();
+		    }
+		}
+    });
 }
