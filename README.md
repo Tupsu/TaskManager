@@ -11,5 +11,5 @@
 
 ## Installation
 1. Unpack **TaskManager** folder to Intalio|BPMS Server's **webapps** folder.
-2. Go to <server UR>/TaskManager.
+2. Go to {server URL}/TaskManager.
 3. Installation ready.
