@@ -8,7 +8,7 @@ TaskManager is Simple jQuery Mobile app that retrivies tasks from intalio.
 * Create new tasks that are available for current user.
 
 ## Requirements
-1. Intalio|BPMS Server
+1. Intalio|BPMS Server.
 
 ## Installation
 1. Unpack **TaskManager** folder to Intalio|BPMS Server's **webapps** folder.
