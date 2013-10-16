@@ -1,4 +1,5 @@
-# TaskManager(https://github.com/Tupsu/TaskManager) is simple jQuery Mobile app that retrivies tasks from intalio.
+# TaskManager
+TaskManager(https://github.com/Tupsu/TaskManager) is simple jQuery Mobile app that retrivies tasks from intalio.
 
 ## Features
 * Find tasks that are available for current user.
