@@ -20,7 +20,7 @@
  * @author Teemu Räsänen
  */
 Lang = {
-	title: 'Tehtävämanageri',
+	title: 'Tehtävienhallinta',
 	login_title: 'Kirjautuminen',
 	username: 'Käyttäjänimi',
 	password: 'Salasana',
